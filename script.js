@@ -969,7 +969,7 @@ const projectData = {
             {
                 title: "Performance Results",
                 description:
-                    "Achieved 81.8% Exact Match and 84.5% Semantic Similarity on a custom retail dataset."
+                    "Achieved 81.8% Exact Match and 84.5% Semantic Similarity on a custom retail dataset, and 90.07% performance on Refer-KITTI-V2 dataset."
             },
             {
                 title: "Academic Contribution",
@@ -1002,6 +1002,7 @@ const projectData = {
         results: {
             exactMatch: "81.8%",
             semanticSimilarity: "84.5%",
+            referKittiV2: "90.07%",
             publication: "MLHMI 2025 – DOI: 10.1109/MLHMI66056.2025.00018"
         },
     
