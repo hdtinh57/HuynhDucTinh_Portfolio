@@ -203,40 +203,16 @@ if (contactForm) {
 
 // ---- Telegram Bot ----
 function sendToTelegramBot(name, email, subject, message) {
-  const BOT_TOKEN = window.TELEGRAM_BOT_TOKEN || "";
-  const CHAT_ID = window.TELEGRAM_CHAT_ID || "";
-
-  const telegramMessage = `
-🤖 *New Contact Form Submission*
-
-👤 *Name:* ${name}
-📧 *Email:* ${email}
-📝 *Subject:* ${subject || "Contact from Portfolio"}
-💬 *Message:*
-${message}
-
-⏰ *Time:* ${new Date().toLocaleString()}
-🌐 *Source:* Portfolio Website
-    `;
-
-  if (BOT_TOKEN && CHAT_ID) {
-    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: telegramMessage,
-        parse_mode: "Markdown",
-      }),
+  fetch('/.netlify/functions/sendMessage', {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, subject, message }),
+  })
+    .then((r) => r.json())
+    .then((data) => {
+      if (!data.success) console.error("Server API Error:", data.error);
     })
-      .then((r) => r.json())
-      .then((data) => {
-        if (!data.ok) console.error("Telegram API Error:", data.description);
-      })
-      .catch((err) => console.error("Error sending to Telegram API:", err));
-  } else {
-    console.warn("Telegram BOT_TOKEN or CHAT_ID is missing. Form submission logged to console only.");
-  }
+    .catch((err) => console.error("Error calling serverless function:", err));
 }
 
 // ---- Notification System ----
