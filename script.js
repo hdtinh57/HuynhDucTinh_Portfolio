@@ -231,18 +231,12 @@ ${message}
     })
       .then((r) => r.json())
       .then((data) => {
-        if (!data.ok) openTelegramApp(name, email, subject, message);
+        if (!data.ok) console.error("Telegram API Error:", data.description);
       })
-      .catch(() => openTelegramApp(name, email, subject, message));
+      .catch((err) => console.error("Error sending to Telegram API:", err));
   } else {
-    openTelegramApp(name, email, subject, message);
+    console.warn("Telegram BOT_TOKEN or CHAT_ID is missing. Form submission logged to console only.");
   }
-}
-
-function openTelegramApp(name, email, subject, message) {
-  const msg = `Hi! I'm ${name} (${email}).\n\nSubject: ${subject || "Contact from Portfolio"}\n\nMessage: ${message}\n\nI found you through your portfolio website.`;
-  const url = `https://t.me/hudutin?text=${encodeURIComponent(msg)}`;
-  window.open(url, "_blank");
 }
 
 // ---- Notification System ----
