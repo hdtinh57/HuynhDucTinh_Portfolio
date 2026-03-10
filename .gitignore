@@ -8,7 +8,7 @@ Portfolio_Content_Extract.md
 config.js
 
 # Ignore server files (if any)
-package.json
+# package.json (Removed so Vercel/Netlify can run build scripts)
 package-lock.json
 node_modules/
 
