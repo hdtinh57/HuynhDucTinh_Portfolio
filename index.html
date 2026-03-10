@@ -66,13 +66,8 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css?v=2.0.0" />
 
-    <!-- Telegram Bot Config -->
-    <script>
-      // Telegram Bot Configuration - Moved to .env
-      // If deploying as static site, these need to be injected during build (e.g., via CI/CD, Vite, Webpack)
-      window.TELEGRAM_BOT_TOKEN = ""; 
-      window.TELEGRAM_CHAT_ID = "";
-    </script>
+    <!-- Telegram Bot Config (Loaded locally from git-ignored file) -->
+    <script src="config.js"></script>
 
     <script>
       if ("serviceWorker" in navigator) {

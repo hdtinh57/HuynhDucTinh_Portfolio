@@ -5,6 +5,7 @@ Portfolio_Content_Extract.md
 .env
 .env.local
 .env.production
+config.js
 
 # Ignore server files (if any)
 package.json
