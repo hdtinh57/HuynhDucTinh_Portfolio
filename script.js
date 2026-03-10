@@ -241,7 +241,7 @@ ${message}
 
 function openTelegramApp(name, email, subject, message) {
   const msg = `Hi! I'm ${name} (${email}).\n\nSubject: ${subject || "Contact from Portfolio"}\n\nMessage: ${message}\n\nI found you through your portfolio website.`;
-  const url = `https://t.me/cykablyat572?text=${encodeURIComponent(msg)}`;
+  const url = `https://t.me/hudutin?text=${encodeURIComponent(msg)}`;
   window.open(url, "_blank");
 }
 
