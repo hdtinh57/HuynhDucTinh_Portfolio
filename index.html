@@ -1,659 +1,907 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Huynh Duc Tinh - AI Engineer specializing in Large Language Models, Computer Vision, and Machine Learning. Building intelligent systems that bridge research and real-world impact.">
-    <meta name="keywords"
-        content="AI Engineer, Machine Learning, LLM, Computer Vision, Python, Deep Learning, Portfolio">
-    <meta name="author" content="Huynh Duc Tinh">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#0a0a0a">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Huynh Duc Tinh - AI Engineer specializing in Large Language Models, Computer Vision, and Machine Learning. Building intelligent systems that bridge research and real-world impact."
+    />
+    <meta
+      name="keywords"
+      content="AI Engineer, Machine Learning, LLM, Computer Vision, Python, Deep Learning, Portfolio"
+    />
+    <meta name="author" content="Huynh Duc Tinh" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0a0a0a" />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://your-portfolio-domain.com/">
-    <meta property="og:title" content="Huynh Duc Tinh - AI Engineer Portfolio">
-    <meta property="og:description"
-        content="AI Engineer specializing in Large Language Models, Computer Vision, and Machine Learning.">
-    <meta property="og:image" content="portfolio-assets/images/profile/your-photo.png">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://your-portfolio-domain.com/" />
+    <meta
+      property="og:title"
+      content="Huynh Duc Tinh - AI Engineer Portfolio"
+    />
+    <meta
+      property="og:description"
+      content="AI Engineer specializing in Large Language Models, Computer Vision, and Machine Learning."
+    />
+    <meta
+      property="og:image"
+      content="portfolio-assets/images/profile/your-photo.png"
+    />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://your-portfolio-domain.com/">
-    <meta property="twitter:title" content="Huynh Duc Tinh - AI Engineer Portfolio">
-    <meta property="twitter:description"
-        content="AI Engineer specializing in Large Language Models, Computer Vision, and Machine Learning.">
-    <meta property="twitter:image" content="portfolio-assets/images/profile/your-photo.png">
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://your-portfolio-domain.com/" />
+    <meta
+      property="twitter:title"
+      content="Huynh Duc Tinh - AI Engineer Portfolio"
+    />
+    <meta
+      property="twitter:description"
+      content="AI Engineer specializing in Large Language Models, Computer Vision, and Machine Learning."
+    />
+    <meta
+      property="twitter:image"
+      content="portfolio-assets/images/profile/your-photo.png"
+    />
 
     <title>Portfolio - Huynh Duc Tinh | AI Engineer</title>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="styles.css?v=2.0.0">
+    <link rel="stylesheet" href="styles.css?v=2.0.0" />
 
     <!-- Telegram Bot Config -->
     <script>
-        // Telegram Bot Configuration
-        window.TELEGRAM_BOT_TOKEN = '';
-        window.TELEGRAM_CHAT_ID = '';
+      // Telegram Bot Configuration - Moved to .env
+      // If deploying as static site, these need to be injected during build (e.g., via CI/CD, Vite, Webpack)
+      window.TELEGRAM_BOT_TOKEN = ""; 
+      window.TELEGRAM_CHAT_ID = "";
     </script>
 
     <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').catch(() => { });
-            });
-        }
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js").catch(() => {});
+        });
+      }
     </script>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <!-- Loading Screen -->
     <div id="loading-screen" class="loading-screen">
-        <div class="loading-container">
-            <div class="loading-text">INITIALIZING<span class="loading-dots">...</span></div>
-            <div class="loading-bar">
-                <div class="loading-bar-fill"></div>
-            </div>
+      <div class="loading-container">
+        <div class="loading-text">
+          INITIALIZING<span class="loading-dots">...</span>
         </div>
+        <div class="loading-bar">
+          <div class="loading-bar-fill"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Navigation -->
     <nav class="navbar" aria-label="Main navigation">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo">
-                <span class="logo-text">H.D.TINH</span>
-                <span class="logo-dot"></span>
-            </a>
-            <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-            <div class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+      <div class="nav-container">
+        <a href="#home" class="nav-logo">
+          <span class="logo-text">H.D.TINH</span>
+          <span class="logo-dot"></span>
+        </a>
+        <div class="nav-menu" id="nav-menu">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#experience" class="nav-link">Experience</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#contact" class="nav-link">Contact</a>
         </div>
+        <div class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </div>
     </nav>
 
     <!-- ===================== HERO ===================== -->
     <section id="home" class="hero">
-        <div class="hero-grid-bg"></div>
-        <div class="hero-bg-text" aria-hidden="true">ENGINEER</div>
-        <div class="container hero-content">
-            <div class="hero-left">
-                <div class="hero-label">AI Engineer & Researcher</div>
-                <h1 class="hero-title">HUYNH DUC <span class="accent">TINH</span></h1>
-                <p class="hero-description">
-                    Specializing in Large Language Models, Computer Vision, and Machine Learning.
-                    Building intelligent systems that bridge research and real-world impact.
-                </p>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">4+</span>
-                        <span class="stat-label">Projects Deployed</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">1</span>
-                        <span class="stat-label">Publication</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">1+</span>
-                        <span class="stat-label">Years Experience</span>
-                    </div>
-                </div>
-                <div class="hero-actions">
-                    <a href="#projects" class="btn btn-primary">
-                        <i class="fas fa-folder-open"></i> View Projects
-                    </a>
-                    <a href="#contact" class="btn btn-outline">
-                        <i class="fas fa-paper-plane"></i> Get In Touch
-                    </a>
-                </div>
+      <div class="hero-grid-bg"></div>
+      <div class="hero-bg-text" aria-hidden="true">ENGINEER</div>
+      <div class="container hero-content">
+        <div class="hero-left">
+          <div class="hero-label">AI Engineer & Researcher</div>
+          <h1 class="hero-title">HUYNH DUC <span class="accent">TINH</span></h1>
+          <p class="hero-description">
+            Specializing in Large Language Models, Computer Vision, and Machine
+            Learning. Building intelligent systems that bridge research and
+            real-world impact.
+          </p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number" id="project-counter">5+</span>
+              <span class="stat-label">Completed Projects</span>
             </div>
-            <div class="hero-right">
-                <div class="hero-image-frame">
-                    <img src="portfolio-assets/images/profile/your-photo.png" alt="Huynh Duc Tinh" loading="eager">
-                    <div class="image-corner top-left"></div>
-                    <div class="image-corner top-right"></div>
-                    <div class="image-corner bottom-left"></div>
-                    <div class="image-corner bottom-right"></div>
-                </div>
-                <div class="hero-status">
-                    <span class="status-dot"></span> Available for opportunities
-                </div>
+            <div class="stat-item">
+              <span class="stat-number" id="publication-counter">1</span>
+              <span class="stat-label">Publication</span>
             </div>
+            <div class="stat-item">
+              <span class="stat-number" id="experience-counter">1+</span>
+              <span class="stat-label">Years Experience</span>
+            </div>
+          </div>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              <i class="fas fa-folder-open"></i> View Projects
+            </a>
+            <a href="#contact" class="btn btn-outline">
+              <i class="fas fa-paper-plane"></i> Get In Touch
+            </a>
+          </div>
         </div>
-        <div class="hero-scroll-indicator">
-            <span>SCROLL</span>
-            <div class="scroll-line"></div>
+        <div class="hero-right">
+          <div class="hero-image-frame">
+            <img
+              src="portfolio-assets/images/profile/your-photo.png"
+              alt="Huynh Duc Tinh"
+              loading="eager"
+            />
+            <div class="image-corner top-left"></div>
+            <div class="image-corner top-right"></div>
+            <div class="image-corner bottom-left"></div>
+            <div class="image-corner bottom-right"></div>
+          </div>
+          <div class="hero-status">
+            <span class="status-dot"></span> Available for opportunities
+          </div>
         </div>
+      </div>
+      <div class="hero-scroll-indicator">
+        <span>SCROLL</span>
+        <div class="scroll-line"></div>
+      </div>
     </section>
 
     <!-- ===================== ABOUT ===================== -->
     <section id="about" class="section-block reveal-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-index">01</span>
-                <h2 class="section-title">ABOUT</h2>
-                <p class="section-subtitle">// system.overview()</p>
-            </div>
-            <div class="about-grid">
-                <div class="about-text">
-                    <h3>Constantly Learning.<br>Building Scalable Intelligence.</h3>
-                    <p>
-                        I am <strong>Huynh Duc Tinh</strong> — an <strong>AI Engineer</strong>. I design systems that
-                        empower machines to reason mathematically and visually, pushing the boundaries of AI capabilities.
-                    </p>
-                    <p>
-                        My focus connects cutting-edge research algorithms with tangible industry deployment. From
-                        federated learning and distributed ML, to containerized AI edge deployment using Docker and
-                        TensorRT. No fluff, just optimized AI systems.
-                    </p>
-                    <div class="about-highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-brain"></i>
-                            <span>Deep Learning / LLMs</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-eye"></i>
-                            <span>Computer Vision</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-server"></i>
-                            <span>MLOps & Deployment</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <div class="about-image-frame">
-                        <img src="portfolio-assets/images/profile/your-photo-about.jpg" alt="Huynh Duc Tinh" loading="lazy">
-                    </div>
-                </div>
-            </div>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-index">01</span>
+          <h2 class="section-title">ABOUT</h2>
+          <p class="section-subtitle">// system.overview()</p>
         </div>
+        <div class="about-grid">
+          <div class="about-text">
+            <h3>Constantly Learning.<br />Building Scalable Intelligence.</h3>
+            <p>
+              I am <strong>Huynh Duc Tinh</strong> — an
+              <strong>AI Engineer</strong>. I design systems that empower
+              machines to reason mathematically and visually, pushing the
+              boundaries of AI capabilities.
+            </p>
+            <p>
+              My focus connects cutting-edge research algorithms with tangible
+              industry deployment. From federated learning and distributed ML,
+              to containerized AI edge deployment using Docker and TensorRT. No
+              fluff, just optimized AI systems.
+            </p>
+            <div class="about-highlights">
+              <div class="highlight-item">
+                <i class="fas fa-brain"></i>
+                <span>Deep Learning / LLMs</span>
+              </div>
+              <div class="highlight-item">
+                <i class="fas fa-eye"></i>
+                <span>Computer Vision</span>
+              </div>
+              <div class="highlight-item">
+                <i class="fas fa-server"></i>
+                <span>MLOps & Deployment</span>
+              </div>
+            </div>
+          </div>
+          <div class="about-image">
+            <div class="about-image-frame">
+              <img
+                src="portfolio-assets/images/profile/your-photo-about.jpg"
+                alt="Huynh Duc Tinh"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ===================== EXPERIENCE ===================== -->
     <section id="experience" class="section-block reveal-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-index">02</span>
-                <h2 class="section-title">EXPERIENCE</h2>
-                <p class="section-subtitle">// deployment.log()</p>
-            </div>
-            <div class="timeline">
-                <!-- Future Space Technology -->
-                <div class="timeline-item reveal-item">
-                    <div class="timeline-marker">
-                        <div class="marker-dot"></div>
-                        <div class="marker-line"></div>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div>
-                                <span class="timeline-company">Future Space Technology JSC</span>
-                                <h3>Full Stack AI Engineer</h3>
-                            </div>
-                            <span class="timeline-date">Oct 2025 — Present</span>
-                        </div>
-                        <p class="timeline-summary">
-                            Lead Software Engineer for AI products: system architecture, API design, and production deployment. Containerized AI applications using Docker and automated workflows for edge devices.
-                        </p>
-                        <ul class="timeline-highlights">
-                            <li>Developed automated pipelines utilizing AI Agents for data crawling, rewriting, and synthesis.</li>
-                            <li>Built real-time Computer Vision systems (Face ID, Pose Estimation, Drone SLAM) integrated with Next.js dashboards.</li>
-                            <li>Optimized model inference latency using TensorRT and ONNX Runtime for real-time constraints.</li>
-                        </ul>
-                        <div class="timeline-tech">
-                            <span class="tech-tag">Docker</span>
-                            <span class="tech-tag">TensorRT</span>
-                            <span class="tech-tag">ONNX</span>
-                            <span class="tech-tag">Next.js</span>
-                            <span class="tech-tag">Computer Vision</span>
-                            <span class="tech-tag">AI Agents</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AiTA Lab -->
-                <div class="timeline-item reveal-item">
-                    <div class="timeline-marker">
-                        <div class="marker-dot"></div>
-                        <div class="marker-line"></div>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div>
-                                <span class="timeline-company">AiTA Lab, FPT University</span>
-                                <h3>AI Researcher</h3>
-                            </div>
-                            <span class="timeline-date">Jan 2025 — Jul 2025</span>
-                        </div>
-                        <p class="timeline-summary">
-                            Conducted research on Distributed Machine Learning and privacy-preserving techniques under the AiTA research group.
-                        </p>
-                        <ul class="timeline-highlights">
-                            <li>Explored federated learning architectures for privacy-preserving model training across distributed systems.</li>
-                        </ul>
-                        <div class="timeline-tech">
-                            <span class="tech-tag">Federated Learning</span>
-                            <span class="tech-tag">Privacy-Preserving ML</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- QAI FPT Software -->
-                <div class="timeline-item reveal-item">
-                    <div class="timeline-marker">
-                        <div class="marker-dot"></div>
-                        <div class="marker-line"></div>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div>
-                                <span class="timeline-company">QAI FPT Software Quy Nhon</span>
-                                <h3>AI Engineer Intern</h3>
-                            </div>
-                            <span class="timeline-date">Jan 2024 — Apr 2024</span>
-                        </div>
-                        <p class="timeline-summary">
-                            Implemented RAG pipelines and developed backend services to expose AI capabilities for enterprise clients.
-                        </p>
-                        <ul class="timeline-highlights">
-                            <li>Implemented RAG pipelines with Pinecone and ChromaDB to automate customer support workflows.</li>
-                            <li>Developed backend services using FastAPI to expose AI capabilities independently.</li>
-                            <li>Delivered 3 Proof-of-Concept chatbots: Sales Support, Data Query, and Form-Filler.</li>
-                        </ul>
-                        <div class="timeline-tech">
-                            <span class="tech-tag">LangChain</span>
-                            <span class="tech-tag">OpenAI</span>
-                            <span class="tech-tag">ChromaDB</span>
-                            <span class="tech-tag">FastAPI</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Education Sub-section -->
-            <div class="section-header" style="margin-top: 6rem;">
-                <span class="section-index">02.1</span>
-                <h2 class="section-title" style="font-size: 2.5rem;">EDUCATION</h2>
-                <p class="section-subtitle">// academic.config()</p>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item reveal-item">
-                    <div class="timeline-marker">
-                        <div class="marker-dot"></div>
-                        <div class="marker-line"></div>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div>
-                                <span class="timeline-company">FPT School of Business & Technology</span>
-                                <h3>Master of Software Engineering — AI</h3>
-                            </div>
-                            <span class="timeline-date">2025 — Present</span>
-                        </div>
-                        <p class="timeline-summary">
-                            Continuing my academic journey to deepen expertise in AI system design, LLM research, and scalable intelligent applications.
-                        </p>
-                    </div>
-                </div>
-                <div class="timeline-item reveal-item">
-                    <div class="timeline-marker">
-                        <div class="marker-dot"></div>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div>
-                                <span class="timeline-company">FPT University Ho Chi Minh City</span>
-                                <h3>Bachelor of Artificial Intelligence</h3>
-                            </div>
-                            <span class="timeline-date">2021 — 2025</span>
-                        </div>
-                        <p class="timeline-summary">
-                            Built a strong foundation in Machine Learning, NLP, and Computer Vision. Graduated with GPA 8.3/10.
-                        </p>
-                    </div>
-                </div>
-            </div>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-index">02</span>
+          <h2 class="section-title">EXPERIENCE</h2>
+          <p class="section-subtitle">// deployment.log()</p>
         </div>
+        <div class="timeline">
+          <!-- Future Space Technology -->
+          <div class="timeline-item reveal-item">
+            <div class="timeline-marker">
+              <div class="marker-dot"></div>
+              <div class="marker-line"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div>
+                  <span class="timeline-company"
+                    >Future Space Technology JSC</span
+                  >
+                  <h3>Full Stack AI Engineer</h3>
+                </div>
+                <span class="timeline-date">Oct 2025 — Present</span>
+              </div>
+              <p class="timeline-summary">
+                Directed end-to-end AI product lifecycles as the sole core
+                engineer, handling system architecture, API design, and
+                deployments. Mentored and managed a team of AI interns from
+                PTIT.
+              </p>
+              <ul class="timeline-highlights">
+                <li>
+                  Developed automated pipelines utilizing AI Agents for data
+                  crawling, rewriting, and synthesis.
+                </li>
+                <li>
+                  Built real-time Computer Vision systems (Face ID, Pose
+                  Estimation, Drone SLAM) integrated with Next.js dashboards.
+                </li>
+                <li>
+                  Optimized model inference latency using TensorRT and ONNX
+                  Runtime for real-time constraints.
+                </li>
+              </ul>
+              <div class="timeline-tech">
+                <span class="tech-tag">Docker</span>
+                <span class="tech-tag">TensorRT</span>
+                <span class="tech-tag">ONNX</span>
+                <span class="tech-tag">Next.js</span>
+                <span class="tech-tag">Computer Vision</span>
+                <span class="tech-tag">AI Agents</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- AiTA Lab -->
+          <div class="timeline-item reveal-item">
+            <div class="timeline-marker">
+              <div class="marker-dot"></div>
+              <div class="marker-line"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div>
+                  <span class="timeline-company">AiTA Lab, FPT University</span>
+                  <h3>AI Researcher</h3>
+                </div>
+                <span class="timeline-date">Jan 2025 — Jul 2025</span>
+              </div>
+              <p class="timeline-summary">
+                Conducted research on Distributed Machine Learning and
+                privacy-preserving techniques under the AiTA research group.
+              </p>
+              <ul class="timeline-highlights">
+                <li>
+                  Explored federated learning architectures for
+                  privacy-preserving model training across distributed systems.
+                </li>
+              </ul>
+              <div class="timeline-tech">
+                <span class="tech-tag">Federated Learning</span>
+                <span class="tech-tag">Privacy-Preserving ML</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- QAI FPT Software -->
+          <div class="timeline-item reveal-item">
+            <div class="timeline-marker">
+              <div class="marker-dot"></div>
+              <div class="marker-line"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div>
+                  <span class="timeline-company"
+                    >QAI FPT Software Quy Nhon</span
+                  >
+                  <h3>AI Engineer Intern</h3>
+                </div>
+                <span class="timeline-date">Jan 2024 — Apr 2024</span>
+              </div>
+              <p class="timeline-summary">
+                Implemented RAG pipelines and developed backend services to
+                expose AI capabilities for enterprise clients.
+              </p>
+              <ul class="timeline-highlights">
+                <li>
+                  Implemented RAG pipelines with Pinecone and ChromaDB to
+                  automate customer support workflows.
+                </li>
+                <li>
+                  Developed backend services using FastAPI to expose AI
+                  capabilities independently.
+                </li>
+                <li>
+                  Delivered 3 Proof-of-Concept chatbots: Sales Support, Data
+                  Query, and Form-Filler.
+                </li>
+              </ul>
+              <div class="timeline-tech">
+                <span class="tech-tag">LangChain</span>
+                <span class="tech-tag">OpenAI</span>
+                <span class="tech-tag">ChromaDB</span>
+                <span class="tech-tag">FastAPI</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education Sub-section -->
+        <div class="section-header" style="margin-top: 6rem">
+          <span class="section-index">02.1</span>
+          <h2 class="section-title" style="font-size: 2.5rem">EDUCATION</h2>
+          <p class="section-subtitle">// academic.config()</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item reveal-item">
+            <div class="timeline-marker">
+              <div class="marker-dot"></div>
+              <div class="marker-line"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div>
+                  <span class="timeline-company"
+                    >FPT School of Business & Technology</span
+                  >
+                  <h3>Master of Software Engineering — AI</h3>
+                </div>
+                <span class="timeline-date">2025 — Present</span>
+              </div>
+              <p class="timeline-summary">
+                Continuing my academic journey to deepen expertise in AI system
+                design, LLM research, and scalable intelligent applications.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item reveal-item">
+            <div class="timeline-marker">
+              <div class="marker-dot"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div>
+                  <span class="timeline-company"
+                    >FPT University Ho Chi Minh City</span
+                  >
+                  <h3>Bachelor of Artificial Intelligence</h3>
+                </div>
+                <span class="timeline-date">2021 — 2025</span>
+              </div>
+              <p class="timeline-summary">
+                Built a strong foundation in Machine Learning, NLP, and Computer
+                Vision. Graduated with GPA 8.3/10.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ===================== SKILLS ===================== -->
     <section id="skills" class="section-block reveal-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-index">03</span>
-                <h2 class="section-title">SKILLS</h2>
-                <p class="section-subtitle">// core.stack()</p>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-category reveal-item">
-                    <div class="skill-category-header">
-                        <i class="fas fa-brain"></i>
-                        <h3>AI & Machine Learning</h3>
-                    </div>
-                    <div class="skill-items">
-                        <span class="tech-tag">Deep Learning</span>
-                        <span class="tech-tag">Model Training</span>
-                        <span class="tech-tag">Data Optimization</span>
-                        <span class="tech-tag">PyTorch</span>
-                        <span class="tech-tag">TensorFlow</span>
-                        <span class="tech-tag">Scikit-learn</span>
-                    </div>
-                </div>
-                <div class="skill-category reveal-item">
-                    <div class="skill-category-header">
-                        <i class="fas fa-eye"></i>
-                        <h3>Computer Vision</h3>
-                    </div>
-                    <div class="skill-items">
-                        <span class="tech-tag">Object Detection</span>
-                        <span class="tech-tag">Tracking</span>
-                        <span class="tech-tag">Depth Estimation</span>
-                        <span class="tech-tag">YOLO</span>
-                        <span class="tech-tag">OpenCV</span>
-                        <span class="tech-tag">TensorRT</span>
-                    </div>
-                </div>
-                <div class="skill-category reveal-item">
-                    <div class="skill-category-header">
-                        <i class="fas fa-comment-dots"></i>
-                        <h3>NLP & LLMs</h3>
-                    </div>
-                    <div class="skill-items">
-                        <span class="tech-tag">LLM Integration</span>
-                        <span class="tech-tag">RAG Systems</span>
-                        <span class="tech-tag">Prompt Engineering</span>
-                        <span class="tech-tag">LangChain</span>
-                        <span class="tech-tag">OpenAI API</span>
-                        <span class="tech-tag">HuggingFace</span>
-                    </div>
-                </div>
-                <div class="skill-category reveal-item">
-                    <div class="skill-category-header">
-                        <i class="fas fa-rocket"></i>
-                        <h3>Tools & Deployment</h3>
-                    </div>
-                    <div class="skill-items">
-                        <span class="tech-tag">Docker</span>
-                        <span class="tech-tag">FastAPI</span>
-                        <span class="tech-tag">Pinecone</span>
-                        <span class="tech-tag">ChromaDB</span>
-                        <span class="tech-tag">Supabase</span>
-                        <span class="tech-tag">Git</span>
-                    </div>
-                </div>
-            </div>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-index">03</span>
+          <h2 class="section-title">SKILLS</h2>
+          <p class="section-subtitle">// core.stack()</p>
         </div>
+        <div class="skills-grid">
+          <div class="skill-category reveal-item">
+            <div class="skill-category-header">
+              <i class="fas fa-brain"></i>
+              <h3>Deep Learning & Frameworks</h3>
+            </div>
+            <div class="skill-items">
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">TensorFlow</span>
+              <span class="tech-tag">Scikit-learn</span>
+              <span class="tech-tag">HuggingFace</span>
+              <span class="tech-tag">TensorRT</span>
+              <span class="tech-tag">ONNX</span>
+            </div>
+          </div>
+          <div class="skill-category reveal-item">
+            <div class="skill-category-header">
+              <i class="fas fa-comment-dots"></i>
+              <h3>Applied GenAI & RAG</h3>
+            </div>
+            <div class="skill-items">
+              <span class="tech-tag">LangChain</span>
+              <span class="tech-tag">OpenAI API</span>
+              <span class="tech-tag">Gemini API</span>
+              <span class="tech-tag">Qdrant</span>
+              <span class="tech-tag">ChromaDB</span>
+              <span class="tech-tag">Pinecone</span>
+              <span class="tech-tag">BGE-M3</span>
+              <span class="tech-tag">Jina AI</span>
+            </div>
+          </div>
+          <div class="skill-category reveal-item">
+            <div class="skill-category-header">
+              <i class="fas fa-eye"></i>
+              <h3>Vision & Specialized Models</h3>
+            </div>
+            <div class="skill-items">
+              <span class="tech-tag">YOLO11</span>
+              <span class="tech-tag">Qwen-VL</span>
+              <span class="tech-tag">Mistral OCR</span>
+              <span class="tech-tag">TempRMOT</span>
+              <span class="tech-tag">Depth Anything V2</span>
+              <span class="tech-tag">OpenCV</span>
+            </div>
+          </div>
+          <div class="skill-category reveal-item">
+            <div class="skill-category-header">
+              <i class="fas fa-server"></i>
+              <h3>MLOps, Backend & Tools</h3>
+            </div>
+            <div class="skill-items">
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">Supabase</span>
+              <span class="tech-tag">SQLite</span>
+              <span class="tech-tag">Streamlit</span>
+              <span class="tech-tag">Gradio</span>
+              <span class="tech-tag">n8n</span>
+              <span class="tech-tag">Git</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ===================== PROJECTS ===================== -->
     <section id="projects" class="section-block reveal-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-index">04</span>
-                <h2 class="section-title">PROJECTS</h2>
-                <p class="section-subtitle">// selected.deployments()</p>
-            </div>
-            <div class="projects-grid">
-                <!-- Project 1: YOLOLabel AI -->
-                <div class="project-card reveal-item project-card-featured">
-                    <div class="project-image project-image-real">
-                        <img src="portfolio-assets/images/projects/yololabel-ai.png" alt="YOLOLabel AI Interface" loading="lazy">
-                        <span class="project-number">01</span>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">YOLOLabel AI</h3>
-                        <p class="project-description">
-                            AI-powered bounding box labeling tool with Active Learning & MLOps dashboard. Complete active learning loop: Label → Train → Auto-predict → Review → Repeat.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">YOLO11</span>
-                            <span class="tech-tag">FastAPI</span>
-                            <span class="tech-tag">SQLite</span>
-                            <span class="tech-tag">Active Learning</span>
-                        </div>
-                        <div class="project-actions">
-                            <button class="btn btn-small details-btn" data-project="yololabel">
-                                <i class="fas fa-expand"></i> Details
-                            </button>
-                            <a href="https://github.com/hdtinh57/YOLOLabel_AI" class="btn btn-small btn-outline" target="_blank">
-                                <i class="fab fa-github"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2: Navigation -->
-                <div class="project-card reveal-item">
-                    <div class="project-image">
-                        <i class="fas fa-route"></i>
-                        <span class="project-number">02</span>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">AI Navigation for Visually Impaired</h3>
-                        <p class="project-description">
-                            Real-time object detection and voice-guided navigation system integrating YOLO11, Depth Anything V2, and GPT-4o. Achieved ~90% object detection accuracy.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">YOLO11</span>
-                            <span class="tech-tag">Depth Anything V2</span>
-                            <span class="tech-tag">GPT-4o</span>
-                            <span class="tech-tag">PyTorch</span>
-                        </div>
-                        <div class="project-actions">
-                            <button class="btn btn-small details-btn" data-project="navigation">
-                                <i class="fas fa-expand"></i> Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3: TempRMOT -->
-                <div class="project-card reveal-item">
-                    <div class="project-image project-image-real project-image-video">
-                        <video src="portfolio-assets/images/projects/temprmot-web.mp4" muted loop playsinline preload="metadata"></video>
-                        <span class="project-number">03</span>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">LLM-Guided Multi-Object Tracking</h3>
-                        <p class="project-description">
-                            Hybrid system combining TempRMOT with LLMs to enhance retail scene understanding. Published at MLHMI 2025.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">LLM</span>
-                            <span class="tech-tag">TempRMOT</span>
-                            <span class="tech-tag">PyTorch</span>
-                        </div>
-                        <div class="project-actions">
-                            <button class="btn btn-small details-btn" data-project="tempromot">
-                                <i class="fas fa-expand"></i> Details
-                            </button>
-                            <a href="https://doi.org/10.1109/MLHMI66056.2025.00018" class="btn btn-small btn-outline" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Paper
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 4: GPT-JSON -->
-                <div class="project-card reveal-item">
-                    <div class="project-image">
-                        <i class="fas fa-database"></i>
-                        <span class="project-number">04</span>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">GPT-JSON: Q&A over Structured Data</h3>
-                        <p class="project-description">
-                            LLM-powered WebApp for conversational JSON querying. Uses LangChain, ChromaDB, and GPT for natural-language access to structured data.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">OpenAI</span>
-                            <span class="tech-tag">LangChain</span>
-                            <span class="tech-tag">ChromaDB</span>
-                            <span class="tech-tag">Gradio</span>
-                        </div>
-                        <div class="project-actions">
-                            <button class="btn btn-small details-btn" data-project="gptjson">
-                                <i class="fas fa-expand"></i> Details
-                            </button>
-                            <a href="https://colab.research.google.com/drive/1sXu8hfet21bB9ctB1UD9iQgfLZWKFUAk#scrollTo=msgQ_YLwcdUm" class="btn btn-small btn-outline" target="_blank">
-                                <i class="fab fa-google"></i> Colab
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 5: News Agent -->
-                <div class="project-card reveal-item">
-                    <div class="project-image">
-                        <i class="fas fa-newspaper"></i>
-                        <span class="project-number">05</span>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Automated News Aggregation Agent</h3>
-                        <p class="project-description">
-                            End-to-end ETL pipeline using n8n and Supabase. Orchestrated Multi-LLM system (GPT-4o-mini & Gemini) reducing manual editorial workload by 80%.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">n8n</span>
-                            <span class="tech-tag">Supabase</span>
-                            <span class="tech-tag">GPT-4o-mini</span>
-                            <span class="tech-tag">Jina AI</span>
-                        </div>
-                        <div class="project-actions">
-                            <button class="btn btn-small details-btn" data-project="newsagent">
-                                <i class="fas fa-expand"></i> Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-index">04</span>
+          <h2 class="section-title">PROJECTS</h2>
+          <p class="section-subtitle">// selected.deployments()</p>
         </div>
+        <div class="projects-grid">
+          <!-- Project 1: LLM Optimization & CoT Distillation -->
+          <div class="project-card reveal-item project-card-featured">
+            <div class="project-image">
+              <i class="fas fa-microchip"></i>
+              <span class="project-number">01</span>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">LLM Optimization & CoT Distillation</h3>
+              <p class="project-description">
+                End-to-end pipeline fine-tuning and distilling CoT reasoning
+                from Gemini/Qwen into a compact 0.8B student model, quantized to
+                GGUF, and deployed locally.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">Unsloth</span>
+                <span class="tech-tag">QLoRA</span>
+                <span class="tech-tag">GGUF</span>
+                <span class="tech-tag">Ollama</span>
+              </div>
+              <div class="project-actions">
+                <button
+                  class="btn btn-small details-btn"
+                  data-project="llm_optimization"
+                >
+                  <i class="fas fa-expand"></i> Details
+                </button>
+                <a
+                  href="https://github.com/hdtinh57/LLM_Optimization"
+                  class="btn btn-small btn-outline"
+                  target="_blank"
+                >
+                  <i class="fab fa-github"></i> GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: Smart Document Q&A -->
+          <div class="project-card reveal-item project-card-featured">
+            <div class="project-image project-image-real">
+              <img
+                src="portfolio-assets/images/projects/smartdocqa/smartdocqa.png"
+                alt="Smart Document Q&A Interface"
+                loading="lazy"
+              />
+              <span class="project-number">02</span>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Smart Document Q&A System</h3>
+              <p class="project-description">
+                Multi-modal RAG system using Mistral OCR, BGE-M3 embeddings, and
+                Qdrant. Supports highly accurate document parsing and
+                hallucination-free LLM querying across PDFs and images.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">RAG</span>
+                <span class="tech-tag">Qdrant</span>
+                <span class="tech-tag">Mistral OCR</span>
+                <span class="tech-tag">Streamlit</span>
+              </div>
+              <div class="project-actions">
+                <button
+                  class="btn btn-small details-btn"
+                  data-project="smartdocqa"
+                >
+                  <i class="fas fa-expand"></i> Details
+                </button>
+                <a
+                  href="https://github.com/hdtinh57/SmartDocQA"
+                  class="btn btn-small btn-outline"
+                  target="_blank"
+                >
+                  <i class="fab fa-github"></i> GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3: YOLOLabel AI -->
+          <div class="project-card reveal-item project-card-featured">
+            <div class="project-image project-image-real">
+              <img
+                src="portfolio-assets/images/projects/yololabel-ai/yololabel-ai.png"
+                alt="YOLOLabel AI Interface"
+                loading="lazy"
+              />
+              <span class="project-number">03</span>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">YOLOLabel AI</h3>
+              <p class="project-description">
+                AI-powered bounding box labeling tool with Active Learning &
+                MLOps dashboard. Complete active learning loop: Label → Train →
+                Auto-predict → Review → Repeat.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">YOLO11</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">SQLite</span>
+                <span class="tech-tag">Active Learning</span>
+              </div>
+              <div class="project-actions">
+                <button
+                  class="btn btn-small details-btn"
+                  data-project="yololabel"
+                >
+                  <i class="fas fa-expand"></i> Details
+                </button>
+                <a
+                  href="https://github.com/hdtinh57/YOLOLabel_AI"
+                  class="btn btn-small btn-outline"
+                  target="_blank"
+                >
+                  <i class="fab fa-github"></i> GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4: News Agent -->
+          <div class="project-card reveal-item">
+            <div class="project-image">
+              <i class="fas fa-newspaper"></i>
+              <span class="project-number">04</span>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Automated News Aggregation Agent</h3>
+              <p class="project-description">
+                End-to-end ETL pipeline using n8n and Supabase. Orchestrated
+                Multi-LLM system (GPT-4o-mini & Gemini) reducing manual
+                editorial workload by 80%.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">n8n</span>
+                <span class="tech-tag">Supabase</span>
+                <span class="tech-tag">GPT-4o-mini</span>
+                <span class="tech-tag">Jina AI</span>
+              </div>
+              <div class="project-actions">
+                <button
+                  class="btn btn-small details-btn"
+                  data-project="newsagent"
+                >
+                  <i class="fas fa-expand"></i> Details
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 5: Navigation -->
+          <div class="project-card reveal-item">
+            <div class="project-image">
+              <i class="fas fa-route"></i>
+              <span class="project-number">05</span>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">AI Navigation for Visually Impaired</h3>
+              <p class="project-description">
+                Real-time object detection and voice-guided navigation system
+                integrating YOLO11, Depth Anything V2, and GPT-4o. Achieved ~90%
+                object detection accuracy.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">YOLO11</span>
+                <span class="tech-tag">Depth Anything V2</span>
+                <span class="tech-tag">GPT-4o</span>
+                <span class="tech-tag">PyTorch</span>
+              </div>
+              <div class="project-actions">
+                <button
+                  class="btn btn-small details-btn"
+                  data-project="navigation"
+                >
+                  <i class="fas fa-expand"></i> Details
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 6: TempRMOT -->
+          <div class="project-card reveal-item">
+            <div class="project-image project-image-real project-image-video">
+              <video
+                src="portfolio-assets/images/projects/temprmot/temprmot-web.mp4"
+                muted
+                loop
+                playsinline
+                preload="metadata"
+              ></video>
+              <span class="project-number">06</span>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">LLM-Guided Multi-Object Tracking</h3>
+              <p class="project-description">
+                Hybrid system combining TempRMOT with LLMs to enhance retail
+                scene understanding. Published at MLHMI 2025.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">LLM</span>
+                <span class="tech-tag">TempRMOT</span>
+                <span class="tech-tag">PyTorch</span>
+              </div>
+              <div class="project-actions">
+                <button
+                  class="btn btn-small details-btn"
+                  data-project="tempromot"
+                >
+                  <i class="fas fa-expand"></i> Details
+                </button>
+                <a
+                  href="https://doi.org/10.1109/MLHMI66056.2025.00018"
+                  class="btn btn-small btn-outline"
+                  target="_blank"
+                >
+                  <i class="fas fa-external-link-alt"></i> Paper
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 7: GPT-JSON -->
+          <div class="project-card reveal-item">
+            <div class="project-image">
+              <i class="fas fa-database"></i>
+              <span class="project-number">07</span>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">GPT-JSON: Q&A over Structured Data</h3>
+              <p class="project-description">
+                LLM-powered WebApp for conversational JSON querying. Uses
+                LangChain, ChromaDB, and GPT for natural-language access to
+                structured data.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">OpenAI</span>
+                <span class="tech-tag">LangChain</span>
+                <span class="tech-tag">ChromaDB</span>
+                <span class="tech-tag">Gradio</span>
+              </div>
+              <div class="project-actions">
+                <button
+                  class="btn btn-small details-btn"
+                  data-project="gptjson"
+                >
+                  <i class="fas fa-expand"></i> Details
+                </button>
+                <a
+                  href="https://colab.research.google.com/drive/1sXu8hfet21bB9ctB1UD9iQgfLZWKFUAk#scrollTo=msgQ_YLwcdUm"
+                  class="btn btn-small btn-outline"
+                  target="_blank"
+                >
+                  <i class="fab fa-google"></i> Colab
+                </a>
+              </div>
+            </div>
+          </div>
+
+      </div>
     </section>
 
     <!-- ===================== CONTACT ===================== -->
     <section id="contact" class="section-block reveal-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-index">05</span>
-                <h2 class="section-title">CONTACT</h2>
-                <p class="section-subtitle">// initiate.connection()</p>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                        <div>
-                            <h4>Email</h4>
-                            <a href="mailto:huynhductinh57@gmail.com">huynhductinh57@gmail.com</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
-                        <div>
-                            <h4>Phone</h4>
-                            <p>+84 908 695 723</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div>
-                            <h4>Location</h4>
-                            <p>Ho Chi Minh City, Vietnam</p>
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        <a href="https://github.com/hdtinh57" class="social-link" target="_blank" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/hdtinh57" class="social-link" target="_blank" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://t.me/cykablyat572" class="social-link" target="_blank" aria-label="Telegram">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="contact-form-wrapper">
-                    <form class="form" action="https://formspree.io/f/your-form-id" method="POST">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" placeholder="Your name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" placeholder="What's this about?">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" placeholder="Your message..." rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary form-submit">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
-                    </form>
-                </div>
-            </div>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-index">05</span>
+          <h2 class="section-title">CONTACT</h2>
+          <p class="section-subtitle">// initiate.connection()</p>
         </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <h4>Email</h4>
+                <a href="mailto:huynhductinh57@gmail.com"
+                  >huynhductinh57@gmail.com</a
+                >
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-phone"></i></div>
+              <div>
+                <h4>Phone</h4>
+                <p>+84 908 695 723</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div>
+                <h4>Location</h4>
+                <p>Ho Chi Minh City, Vietnam</p>
+              </div>
+            </div>
+            <div class="social-links">
+              <a
+                href="https://github.com/hdtinh57"
+                class="social-link"
+                target="_blank"
+                aria-label="GitHub"
+              >
+                <i class="fab fa-github"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/hdtinh57"
+                class="social-link"
+                target="_blank"
+                aria-label="LinkedIn"
+              >
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a
+                href="https://t.me/hudutin"
+                class="social-link"
+                target="_blank"
+                aria-label="Telegram"
+              >
+                <i class="fab fa-telegram-plane"></i>
+              </a>
+            </div>
+          </div>
+          <div class="contact-form-wrapper">
+            <form
+              class="form"
+              action="https://formspree.io/f/your-form-id"
+              method="POST"
+            >
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="your@email.com"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  placeholder="What's this about?"
+                />
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Your message..."
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary form-submit">
+                <i class="fas fa-paper-plane"></i> Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ===================== FOOTER ===================== -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-left">
-                    <span class="footer-logo">H.D.TINH</span>
-                    <p>AI Engineer & Researcher</p>
-                </div>
-                <div class="footer-center">
-                    <a href="#home" class="footer-link">Home</a>
-                    <a href="#about" class="footer-link">About</a>
-                    <a href="#experience" class="footer-link">Experience</a>
-                    <a href="#projects" class="footer-link">Projects</a>
-                    <a href="#contact" class="footer-link">Contact</a>
-                </div>
-                <div class="footer-right">
-                    <p>&copy; 2025 Huynh Duc Tinh. All Rights Reserved.</p>
-                </div>
-            </div>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-left">
+            <span class="footer-logo">H.D.TINH</span>
+            <p>AI Engineer & Researcher</p>
+          </div>
+          <div class="footer-center">
+            <a href="#home" class="footer-link">Home</a>
+            <a href="#about" class="footer-link">About</a>
+            <a href="#experience" class="footer-link">Experience</a>
+            <a href="#projects" class="footer-link">Projects</a>
+            <a href="#contact" class="footer-link">Contact</a>
+          </div>
+          <div class="footer-right">
+            <p>&copy; 2025 Huynh Duc Tinh. All Rights Reserved.</p>
+          </div>
         </div>
+      </div>
     </footer>
 
     <!-- ===================== PROJECT MODAL ===================== -->
     <div id="project-modal" class="modal-overlay">
-        <div class="modal-container">
-            <button class="modal-close close" aria-label="Close modal">
-                <i class="fas fa-times"></i>
-            </button>
-            <div id="modal-body" class="modal-body"></div>
-        </div>
+      <div class="modal-container">
+        <button class="modal-close close" aria-label="Close modal">
+          <i class="fas fa-times"></i>
+        </button>
+        <div id="modal-body" class="modal-body"></div>
+      </div>
     </div>
 
     <script src="script.js?v=2.0.0"></script>
-</body>
-
+  </body>
 </html>
