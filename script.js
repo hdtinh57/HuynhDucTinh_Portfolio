@@ -672,12 +672,124 @@ const projectData = {
       },
     ],
   },
+  ai_stock_advisor: {
+    title: "AI Stock Advisor",
+    subtitle:
+      "Full-Stack Desktop Application for Vietnamese Stock Market Advisory",
+    overview:
+      "A production-grade, single-binary desktop application for the Vietnamese stock market. The AI Chatbot, powered by Google Gemini, automatically researches related articles and news about any stock ticker, performs comprehensive technical & fundamental analysis, and provides personalized investment insights — all delivered through a modern React interface with SSE streaming.",
+    contributions:
+      "I independently designed and built the entire system end-to-end as a personal project — from the FastAPI backend with 11 route modules and 14 service layers, to the React+Vite frontend with Zustand state management. I also engineered the PyInstaller build pipeline to ship a self-contained .exe with embedded frontend and auto-update capability.",
+    features: [
+      {
+        title: "AI-Powered Chat with Tool Calling",
+        description:
+          "Gemini-based chatbot with function calling. The AI autonomously invokes real-time stock price tools, researches related news articles, calculates financial indicators (F-Score, Z-Score, DuPont), and streams responses via SSE with automatic API key rotation on rate limits.",
+      },
+      {
+        title: "Real-Time Stock Data & Analysis",
+        description:
+          "Live Vietnamese stock prices with interactive TradingView-style charts. Technical indicators (MA, RSI, MACD, Bollinger Bands) and fundamental scoring (Piotroski F-Score, Altman Z-Score, DuPont decomposition). Inline stock panels with multi-symbol comparison.",
+      },
+      {
+        title: "Stock Screener & Comparator",
+        description:
+          "Filter the entire Vietnamese market by preset strategies (Blue chip, High ROE, Undervalued) or custom criteria. Side-by-side stock comparison with radar charts and comprehensive financial metrics.",
+      },
+      {
+        title: "Watchlist & Price Alerts",
+        description:
+          "Personalized watchlist with real-time price tracking and percentage changes. Configurable price alerts that notify users when targets are hit. Poll-based monitoring with toast notifications.",
+      },
+      {
+        title: "Knowledge Base (RAG)",
+        description:
+          "Upload PDF documents (investment books, reports) to build a custom knowledge base using ChromaDB vector search. The AI references uploaded materials to ground its answers with domain-specific context.",
+      },
+      {
+        title: "PDF Reports & Auto-Update",
+        description:
+          "Generate downloadable PDF stock analysis reports. Built-in auto-update system that checks GitHub Releases for new versions and performs in-place binary replacement.",
+      },
+    ],
+    techStack: [
+      "React",
+      "Vite",
+      "FastAPI",
+      "Google Gemini",
+      "ChromaDB",
+      "SQLite",
+      "Zustand",
+      "PyInstaller",
+      "SSE Streaming",
+      "vnstock",
+    ],
+    team: {
+      size: 1,
+      role: "Full-Stack AI Engineer",
+      focus: [
+        "Designed entire system architecture (frontend + backend + build)",
+        "Built 11 API routes and 14 backend services",
+        "Implemented AI engine with Gemini function-calling and multi-key rotation",
+        "Developed React UI with Zustand state management",
+        "Engineered PyInstaller build pipeline for single-binary distribution",
+        "Created auto-update system with GitHub Releases integration",
+      ],
+    },
+    results: {
+      architecture: "React + FastAPI + PyInstaller",
+      aiModel: "Google Gemini 2.5 Flash",
+      features: "Chat, Watchlist, Alerts, Screener, Compare, Knowledge Base",
+      distribution: "Single .exe (~120MB) with auto-update",
+      status: "Active Development — v1.3.8",
+    },
+    gallery: [
+      {
+        src: "portfolio-assets/images/projects/ai-stock-advisor/chat-main.png",
+        caption: "AI Chat Interface — Welcome Screen",
+      },
+      {
+        src: "portfolio-assets/images/projects/ai-stock-advisor/chat-analysis.png",
+        caption: "AI Stock Analysis — Automated Research & Indicators",
+      },
+      {
+        src: "portfolio-assets/images/projects/ai-stock-advisor/watchlist.png",
+        caption: "Watchlist — Real-time Price Tracking",
+      },
+      {
+        src: "portfolio-assets/images/projects/ai-stock-advisor/screener.png",
+        caption: "Stock Screener — Filter by Strategy",
+      },
+      {
+        src: "portfolio-assets/images/projects/ai-stock-advisor/compare.png",
+        caption: "Stock Comparison — FPT vs VCB Side-by-Side",
+      },
+      {
+        src: "portfolio-assets/images/projects/ai-stock-advisor/alerts.png",
+        caption: "Price Alerts — Notification System",
+      },
+      {
+        src: "portfolio-assets/images/projects/ai-stock-advisor/knowledge.png",
+        caption: "Knowledge Base — RAG Document Upload",
+      },
+    ],
+    links: [
+      {
+        text: "GitHub Repository",
+        url: "https://github.com/hdtinh57/AI-Fintech",
+        icon: "fab fa-github",
+      },
+    ],
+  },
 };
 
 
 function openProjectModal(projectId) {
   const project = projectData[projectId];
   if (!project) return;
+
+  // Set gallery for lightbox
+  currentModalGallery = project.gallery || [];
 
   // Extract the project image/video from the DOM card itself
   // Assuming the user clicked a details button, we can find the matching project card by matching data-project
@@ -739,6 +851,27 @@ function openProjectModal(projectId) {
                       )
                       .join("")}
                 </div>
+
+                ${
+                  project.gallery && project.gallery.length > 0
+                    ? `
+                <div class="project-gallery">
+                    <h3><i class="fas fa-images"></i> Screenshots</h3>
+                    <div class="gallery-grid">
+                        ${project.gallery
+                          .map(
+                            (img, i) => `
+                            <div class="gallery-item" onclick="openLightbox(${i})">
+                                <img src="${img.src}" alt="${img.caption}" loading="lazy" />
+                                <span class="gallery-caption">${img.caption}</span>
+                            </div>
+                        `,
+                          )
+                          .join("")}
+                    </div>
+                </div>`
+                    : ""
+                }
             </div>
 
             <div class="modal-sidebar">
@@ -932,3 +1065,75 @@ if (expCounter) {
     expCounter.textContent = `${years}+`;
   }
 }
+
+// ---- Lightbox for Gallery Screenshots ----
+let lightboxGallery = [];
+let lightboxIndex = 0;
+let lightboxEl = null;
+
+function createLightbox() {
+  if (lightboxEl) return;
+  lightboxEl = document.createElement("div");
+  lightboxEl.className = "lightbox-overlay";
+  lightboxEl.innerHTML = `
+    <button class="lightbox-close" aria-label="Close"><i class="fas fa-times"></i></button>
+    <button class="lightbox-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+    <button class="lightbox-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+    <div class="lightbox-content">
+      <img class="lightbox-img" src="" alt="" />
+      <p class="lightbox-caption"></p>
+    </div>
+  `;
+  document.body.appendChild(lightboxEl);
+
+  lightboxEl.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
+  lightboxEl.querySelector(".lightbox-prev").addEventListener("click", () => navigateLightbox(-1));
+  lightboxEl.querySelector(".lightbox-next").addEventListener("click", () => navigateLightbox(1));
+  lightboxEl.addEventListener("click", (e) => {
+    if (e.target === lightboxEl) closeLightbox();
+  });
+}
+
+let currentModalGallery = [];
+
+function openLightbox(index) {
+  if (currentModalGallery.length === 0) return;
+  lightboxGallery = currentModalGallery;
+
+  createLightbox();
+  lightboxIndex = index;
+  updateLightbox();
+  lightboxEl.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeLightbox() {
+  if (lightboxEl) {
+    lightboxEl.classList.remove("active");
+    // Restore scroll — modal is still open
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function navigateLightbox(dir) {
+  lightboxIndex = (lightboxIndex + dir + lightboxGallery.length) % lightboxGallery.length;
+  updateLightbox();
+}
+
+function updateLightbox() {
+  if (!lightboxEl || lightboxGallery.length === 0) return;
+  const item = lightboxGallery[lightboxIndex];
+  const img = lightboxEl.querySelector(".lightbox-img");
+  const caption = lightboxEl.querySelector(".lightbox-caption");
+  img.src = item.src;
+  img.alt = item.caption;
+  caption.textContent = `${item.caption}  (${lightboxIndex + 1}/${lightboxGallery.length})`;
+}
+
+// Keyboard navigation for lightbox
+document.addEventListener("keydown", (e) => {
+  if (!lightboxEl || !lightboxEl.classList.contains("active")) return;
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowLeft") navigateLightbox(-1);
+  if (e.key === "ArrowRight") navigateLightbox(1);
+});

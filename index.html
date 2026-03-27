@@ -64,7 +64,7 @@
     />
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="styles.css?v=2.0.0" />
+    <link rel="stylesheet" href="styles.css?v=2.1.0" />
 
     <script>
       if ("serviceWorker" in navigator) {
@@ -126,7 +126,7 @@
           </p>
           <div class="hero-stats">
             <div class="stat-item">
-              <span class="stat-number" id="project-counter">5+</span>
+              <span class="stat-number" id="project-counter">8+</span>
               <span class="stat-label">Completed Projects</span>
             </div>
             <div class="stat-item">
@@ -486,6 +486,49 @@
           <p class="section-subtitle">// selected.deployments()</p>
         </div>
         <div class="projects-grid">
+          <!-- Project 0: AI Stock Advisor -->
+          <div class="project-card reveal-item project-card-featured">
+            <div class="project-image project-image-real">
+              <img
+                src="portfolio-assets/images/projects/ai-stock-advisor/chat-main.png"
+                alt="AI Stock Advisor Interface"
+                loading="lazy"
+              />
+              <span class="project-number">★</span>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">AI Stock Advisor</h3>
+              <p class="project-description">
+                Full-stack desktop application for Vietnamese stock market
+                advisory. AI Chatbot powered by Gemini automatically researches
+                related articles, performs technical & fundamental analysis, and
+                provides personalized investment insights.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">Gemini AI</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">RAG</span>
+                <span class="tech-tag">PyInstaller</span>
+              </div>
+              <div class="project-actions">
+                <button
+                  class="btn btn-small details-btn"
+                  data-project="ai_stock_advisor"
+                >
+                  <i class="fas fa-expand"></i> Details
+                </button>
+                <a
+                  href="https://github.com/hdtinh57/AI-Fintech"
+                  class="btn btn-small btn-outline"
+                  target="_blank"
+                >
+                  <i class="fab fa-github"></i> GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+
           <!-- Project 1: LLM Optimization & CoT Distillation -->
           <div class="project-card reveal-item project-card-featured">
             <div class="project-image">
@@ -894,6 +937,6 @@
       </div>
     </div>
 
-    <script src="script.js?v=2.0.0"></script>
+    <script src="script.js?v=2.1.0"></script>
   </body>
 </html>
