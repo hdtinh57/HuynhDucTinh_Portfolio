@@ -1,80 +1,120 @@
 const https = require('https');
 
-exports.handler = async (event, context) => {
+const LIMITS = {
+  name: 100,
+  email: 120,
+  subject: 160,
+  message: 2000,
+};
+
+function jsonResponse(statusCode, body) {
+  return {
+    statusCode,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  };
+}
+
+function sanitizeText(value, maxLength) {
+  return String(value || '')
+    .replace(/[<>]/g, '')
+    .trim()
+    .slice(0, maxLength);
+}
+
+function validatePayload(body) {
+  const data = JSON.parse(body || '{}');
+  const name = sanitizeText(data.name, LIMITS.name);
+  const email = sanitizeText(data.email, LIMITS.email);
+  const subject = sanitizeText(data.subject || 'Contact from Portfolio', LIMITS.subject);
+  const message = sanitizeText(data.message, LIMITS.message);
+
+  if (name.length < 2) return { error: 'Name must be at least 2 characters.' };
+  if (!/^\S+@\S+\.\S+$/.test(email)) return { error: 'Enter a valid email address.' };
+  if (message.length < 10) return { error: 'Message must be at least 10 characters.' };
+
+  return { value: { name, email, subject, message } };
+}
+
+function sendTelegramMessage(botToken, chatId, text) {
+  const payload = JSON.stringify({
+    chat_id: chatId,
+    text,
+  });
+
+  const options = {
+    hostname: 'api.telegram.org',
+    port: 443,
+    path: `/bot${botToken}/sendMessage`,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(payload),
+    },
+  };
+
+  return new Promise((resolve, reject) => {
+    const req = https.request(options, (res) => {
+      let responseBody = '';
+      res.on('data', (chunk) => {
+        responseBody += chunk;
+      });
+      res.on('end', () => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          resolve();
+          return;
+        }
+        reject(new Error(`Telegram API responded with ${res.statusCode}: ${responseBody}`));
+      });
+    });
+
+    req.on('error', reject);
+    req.write(payload);
+    req.end();
+  });
+}
+
+exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: "Method Not Allowed" };
+    return jsonResponse(405, { success: false, error: 'Method Not Allowed' });
   }
 
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (!botToken || !chatId) {
+    console.error('Missing Telegram environment variables.');
+    return jsonResponse(500, { success: false, error: 'Server configuration error.' });
+  }
+
+  let payload;
   try {
-    const data = JSON.parse(event.body);
-    const { name, email, subject, message } = data;
+    payload = validatePayload(event.body);
+  } catch {
+    return jsonResponse(400, { success: false, error: 'Invalid request body.' });
+  }
 
-    const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-    const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+  if (payload.error) {
+    return jsonResponse(400, { success: false, error: payload.error });
+  }
 
-    if (!BOT_TOKEN || !CHAT_ID) {
-      console.error("Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID environment variables.");
-      return { 
-        statusCode: 500, 
-        body: JSON.stringify({ success: false, error: 'Server configuration error' }) 
-      };
-    }
+  const { name, email, subject, message } = payload.value;
+  const telegramMessage = [
+    'New Portfolio Contact',
+    `Name: ${name}`,
+    `Email: ${email}`,
+    `Subject: ${subject}`,
+    '',
+    message,
+    '',
+    `Time: ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' })}`,
+  ].join('\n');
 
-    const telegramMessage = `
-🤖 *New Contact Form Submission*
-
-👤 *Name:* ${name}
-📧 *Email:* ${email}
-📝 *Subject:* ${subject || "Contact from Portfolio"}
-💬 *Message:*
-${message}
-
-⏰ *Time:* ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' })}
-🌐 *Source:* Portfolio Website
-`;
-
-    const payload = JSON.stringify({
-      chat_id: CHAT_ID,
-      text: telegramMessage,
-      parse_mode: "Markdown",
-    });
-
-    const options = {
-      hostname: 'api.telegram.org',
-      port: 443,
-      path: `/bot${BOT_TOKEN}/sendMessage`,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(payload)
-      }
-    };
-
-    return new Promise((resolve, reject) => {
-      const req = https.request(options, (res) => {
-        let responseBody = '';
-        res.on('data', (d) => { responseBody += d; });
-        res.on('end', () => {
-          if (res.statusCode === 200) {
-            resolve({ statusCode: 200, body: JSON.stringify({ success: true }) });
-          } else {
-            console.error('Telegram API Error:', responseBody);
-            resolve({ statusCode: 500, body: JSON.stringify({ success: false, error: 'Telegram API Error' }) });
-          }
-        });
-      });
-
-      req.on('error', (e) => {
-        console.error('Request Error:', e);
-        resolve({ statusCode: 500, body: JSON.stringify({ success: false, error: e.message }) });
-      });
-
-      req.write(payload);
-      req.end();
-    });
-
+  try {
+    await sendTelegramMessage(botToken, chatId, telegramMessage);
+    return jsonResponse(200, { success: true });
   } catch (error) {
-    console.error('Handler Error:', error);
-    return { statusCode: 500, body: JSON.stringify({ success: false, error: error.message }) };
+    console.error('Telegram delivery failed:', error);
+    return jsonResponse(502, { success: false, error: 'Message delivery failed.' });
   }
 };
