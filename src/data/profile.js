@@ -9,9 +9,10 @@ export const profile = {
   email: 'huynhductinh57@gmail.com',
   phone: '+84 908 695 723',
   profileImages: {
-    dark: '',
-    light: '',
-    transition: '',
+    dark: '/portfolio-assets/images/profile/dark.png',
+    light: '/portfolio-assets/images/profile/light.png',
+    transition: '/portfolio-assets/images/profile/transition.mp4',
+    transitionReverse: '/portfolio-assets/images/profile/transition-reverse.mp4',
     fallbackDark: '/portfolio-assets/images/profile/your-photo.png',
     fallbackLight: '/portfolio-assets/images/profile/your-photo-about.jpg',
   },
@@ -130,12 +131,6 @@ export const proofItems = [
     value: 'GitHub portfolio',
     detail: 'RAG, CV labeling, LLM optimization, and stock advisory systems.',
     href: 'https://github.com/hdtinh57',
-  },
-  {
-    label: 'Download CV',
-    value: 'PDF',
-    detail: 'English CV for recruiters and technical reviewers.',
-    href: '/CV/AIEngineer-HuynhDucTinh-Eng.pdf',
   },
 ];
 

@@ -42,6 +42,38 @@ button:disabled {
   opacity: 0.65;
 }
 
+* {
+  scrollbar-color: color-mix(in srgb, var(--accent) 70%, var(--text-muted)) color-mix(in srgb, var(--bg-primary) 88%, var(--bg-card));
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background:
+    linear-gradient(90deg, transparent 0 35%, color-mix(in srgb, var(--border-color) 70%, transparent) 35% 65%, transparent 65%),
+    color-mix(in srgb, var(--bg-primary) 90%, var(--bg-card));
+}
+
+::-webkit-scrollbar-thumb {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--accent) 95%, white), var(--accent-secondary));
+  border: 2px solid var(--bg-primary);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--bg-primary);
+}
+
 img,
 video {
   display: block;
@@ -56,7 +88,7 @@ video {
 
 .section-block {
   border-bottom: 1px solid var(--border-color);
-  padding: clamp(5rem, 10vw, 9rem) 0;
+  padding: clamp(5.5rem, 11vw, 10rem) 0;
 }
 
 .eyebrow {

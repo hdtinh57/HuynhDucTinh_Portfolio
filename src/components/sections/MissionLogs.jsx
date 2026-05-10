@@ -6,7 +6,7 @@ export function MissionLogs({ onSelectProject }) {
   return (
     <section id="mission-logs" className="section-block">
       <div className="container">
-        <header className="section-header split-header">
+        <header className="section-header">
           <div>
             <p className="eyebrow">selected.deployments()</p>
             <h2>Mission Logs</h2>

@@ -4,12 +4,12 @@ export function ProofLayer() {
   return (
     <section id="proof" className="section-block proof-layer">
       <div className="container">
-        <header className="section-header split-header">
+        <header className="section-header">
           <div>
             <p className="eyebrow">proof.layer()</p>
             <h2>Signals recruiters can verify</h2>
           </div>
-          <p className="lede">Publication, source code, product evidence, and CV access in one credibility layer.</p>
+          <p className="lede">Publication, source code, and product evidence in one credibility layer.</p>
         </header>
         <div className="proof-grid">
           {proofItems.map((item) => (
