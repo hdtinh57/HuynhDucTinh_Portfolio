@@ -45,3 +45,9 @@ build/
 CV/
 docs/
 .superpowers/
+.agents/
+.claude/
+.netlify/
+.playwright-mcp/
+skills-lock.json
+*.stackdump
